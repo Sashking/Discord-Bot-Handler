@@ -4,10 +4,9 @@ const config = require('./config.json');
 const client = new Client({
 	disableEveryone: true,
 });
-const mongoKey = config.mongo;
 const mongo = require('mongoose');
 mongo
-	.connect(mongoKey, {
+	.connect('mongodb+srv://sashking:fRDs453VMEfvJLvl@cluster0.drv4c.mongodb.net/Data', {
 		useUnifiedTopology: true,
 		useNewUrlParser: true,
 	})

@@ -23,7 +23,7 @@ module.exports = {
 
 		message.channel.send(
 			new MessageEmbed()
-				.setDescription(`You worked as a **${jobs[jobIndex]}** and earned **${coins}** coins!`)
+				.setDescription(`You worked as a **${jobs[jobIndex]}** and earned **${coins}** :coin:!`)
 				.setColor('00D166')
 				.setTimestamp()
 		);

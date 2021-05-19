@@ -17,7 +17,7 @@ module.exports = {
             message.channel.send(
                 new MessageEmbed()
                     .setDescription(
-                        `You successfully commited a crime and earned **${coins}** coins!`
+                        `You successfully commited a crime and earned **${coins}** :coin:!`
                     )
                     .setColor('00D166')
                     .setTimestamp()
@@ -27,7 +27,7 @@ module.exports = {
             message.channel.send(
                 new MessageEmbed()
                     .setDescription(
-                        `You got caught and lost **${coins}** coins! Better luck next time...`
+                        `You got caught and lost **${coins}** :coin:! Better luck next time...`
                     )
                     .setColor('F93A2F')
                     .setTimestamp()

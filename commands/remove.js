@@ -16,6 +16,6 @@ module.exports = {
 			return message.channel.send('Please specify an amount.');
 		client.remove(member.id, parseInt(args[0]));
 
-		message.channel.send(`Removed ${args[0]} coins from ${member}!`);
+		message.channel.send(`Removed ${args[0]} :coin: from ${member}!`);
 	},
 };

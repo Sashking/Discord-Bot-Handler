@@ -16,6 +16,6 @@ module.exports = {
 			return message.channel.send('Please specify an amount.');
 		client.add(member.id, parseInt(args[0]));
 
-		message.channel.send(`Added ${args[0]} coins!`);
+		message.channel.send(`Added ${args[0]} :coin: to ${member}!`);
 	},
 };

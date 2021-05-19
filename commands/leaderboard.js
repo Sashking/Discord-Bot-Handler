@@ -34,7 +34,7 @@ module.exports = {
 					data.map((v, i) => {
 						return `${i + 1}. ${
 							client.users.cache.get(v.id).tag
-						} -> **${v.bal} coins**`;
+						} -> **${v.bal} :coin:**`;
 					})
 				)
 				.setColor('F8C300')

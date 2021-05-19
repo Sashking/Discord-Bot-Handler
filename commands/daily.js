@@ -17,7 +17,7 @@ module.exports = {
 					message.author.tag,
 					message.author.displayAvatarURL({ dynamic: true })
 				)
-				.setDescription(`You received **${coins}** today as your daily reward!\nMake sure to come back tomorrow and claim your daily reward again.`)
+				.setDescription(`You received **${coins}** :coin: today as your daily reward!\nMake sure to come back tomorrow and claim your daily reward again.`)
 				.setColor('00D166')
 				.setTimestamp()
 		);

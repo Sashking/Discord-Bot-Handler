@@ -52,6 +52,7 @@ module.exports = {
 			);
 
 		const convertedAmount = parseInt(amount);
+
 		if ((await client.balance(message.author.id)) < convertedAmount)
 			return message.channel.send(
 				new MessageEmbed()
@@ -62,8 +63,12 @@ module.exports = {
 					.setDescription(`Insufficient balance!`)
 			);
 
+		const transactionFee = Math.floor((amount / 100) * 8); // 8% transaction fee
+		const transaction = convertedAmount - transactionFee;
+
 		await client.remove(message.author.id, convertedAmount);
-		await client.add(user.id, convertedAmount);
+		await client.add(user.id, transaction);
+		await client.add('512670031247573005', transactionFee);
 
 		message.channel.send(
 			new MessageEmbed()
@@ -72,7 +77,7 @@ module.exports = {
 					message.author.displayAvatarURL({ dynamic: true })
 				)
 				.setDescription(
-					`${message.author} transfered **${convertedAmount}** coins to ${user}`
+					`${message.author} transfered **${transaction}** :coin: to ${user} after 8% transaction fee.`
 				)
 				.setColor('00D166')
 		);

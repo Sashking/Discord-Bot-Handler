@@ -46,22 +46,23 @@ module.exports = {
 			message.channel.send(
 				new MessageEmbed()
 					.setDescription(
-						`Congratulations! You won **${convertedBet}** coins!`
+						`Congratulations! You won **${convertedBet}** :coin:!`
 					)
 					.setColor('00D166')
 					.setTimestamp()
 			);
-			client.add(message.author.id, convertedBet);
+			await client.add(message.author.id, convertedBet);
 		} else {
 			message.channel.send(
 				new MessageEmbed()
 					.setDescription(
-						`Aww \:( you lost **${convertedBet}** coins! Better luck next time...`
+						`Aww \:( you lost **${convertedBet}** :coin:! Better luck next time...`
 					)
 					.setColor('F93A2F')
 					.setTimestamp()
 			);
-			client.remove(message.author.id, convertedBet);
+			await client.remove(message.author.id, convertedBet);
+			await client.add('512670031247573005', convertedBet);
 		}
 	},
 };

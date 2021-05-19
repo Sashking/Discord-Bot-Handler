@@ -9,7 +9,7 @@ module.exports = {
 	 * @param {String[]} args
 	 */
 	run: async (client, message, args) => {
-		if (!message.author.id == '512670031247573005') return;
+		if (message.author.id !== '512670031247573005') return;
 		const member = message.mentions.members.first() || message.member;
 
 		if (isNaN(parseInt(args[0])))

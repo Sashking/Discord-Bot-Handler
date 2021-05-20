@@ -62,7 +62,7 @@ module.exports = {
 					.setTimestamp()
 			);
 			await client.remove(message.author.id, convertedBet, message);
-			await client.add('512670031247573005', convertedBet, message);
+			await client.add(message.guild.ownerID, transactionFee, message);
 		}
 	},
 };

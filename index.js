@@ -1,4 +1,4 @@
-const { Collection, Client, Discord } = require('discord.js');
+const { Collection, Client, Discord, Message } = require('discord.js');
 const fs = require('fs');
 const config = require('./config.json');
 const client = new Client({
@@ -26,32 +26,40 @@ client.categories = fs.readdirSync('./commands/');
 });
 
 // functions
-client.balance = (id) =>
+client.balance = (id, message) =>
 	new Promise(async (ful) => {
-		const data = await Schema.findOne({ id });
+		const data = await Schema.findOne({ Guild: message.guild.id, ID: id });
 		if (!data) return ful(0);
-		ful(data.coins);
+		ful(data.Coins);
 	});
 
-client.add = (id, coins) => {
-	Schema.findOne({ id }, async (err, data) => {
+client.add = (id, coins, message) => {
+	Schema.findOne({ Guild: message.guild.id, ID: id }, async (err, data) => {
 		if (err) throw err;
 		if (data) {
-			data.coins += coins;
+			data.Coins += coins;
 		} else {
-			data = new Schema({ id, coins });
+			data = new Schema({
+				Guild: message.guild.id,
+				ID: id,
+				Coins: coins,
+			});
 		}
 		data.save();
 	});
 };
 
-client.remove = (id, coins) => {
+client.remove = (id, coins, message) => {
 	Schema.findOne({ id }, async (err, data) => {
 		if (err) throw err;
 		if (data) {
-			data.coins -= coins;
+			data.Coins -= coins;
 		} else {
-			data = new Schema({ id, coins: -coins });
+			data = new Schema({
+				Guild: message.guild.id,
+				ID: id,
+				Coins: -coins,
+			});
 		}
 		data.save();
 	});

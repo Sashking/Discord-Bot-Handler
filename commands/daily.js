@@ -21,6 +21,6 @@ module.exports = {
 				.setColor('00D166')
 				.setTimestamp()
 		);
-		client.add(message.author.id, coins);
+		client.add(message.author.id, coins, message);
 	},
 };

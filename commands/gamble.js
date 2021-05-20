@@ -29,7 +29,7 @@ module.exports = {
 
 		const convertedBet = parseInt(bet);
 
-		if (client.balance(message.author.id) < convertedBet || bet < 1) {
+		if (client.balance(message.author.id, message) < convertedBet || bet < 1) {
 			return message.channel.send(
 				new MessageEmbed()
 					.setAuthor(
@@ -51,7 +51,7 @@ module.exports = {
 					.setColor('00D166')
 					.setTimestamp()
 			);
-			await client.add(message.author.id, convertedBet);
+			await client.add(message.author.id, convertedBet, message);
 		} else {
 			message.channel.send(
 				new MessageEmbed()
@@ -61,8 +61,8 @@ module.exports = {
 					.setColor('F93A2F')
 					.setTimestamp()
 			);
-			await client.remove(message.author.id, convertedBet);
-			await client.add('512670031247573005', convertedBet);
+			await client.remove(message.author.id, convertedBet, message);
+			await client.add('512670031247573005', convertedBet, message);
 		}
 	},
 };

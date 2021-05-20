@@ -11,6 +11,7 @@ module.exports = {
 	run: async (client, message, args) => {
 		const coins = Math.floor(Math.random() * 35000) + 1;
 
+		client.add(message.author.id, coins, message);
 		message.channel.send(
 			new MessageEmbed()
 				.setAuthor(
@@ -21,6 +22,5 @@ module.exports = {
 				.setColor('00D166')
 				.setTimestamp()
 		);
-		client.add(message.author.id, coins);
 	},
 };

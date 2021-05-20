@@ -53,7 +53,7 @@ module.exports = {
 
 		const convertedAmount = parseInt(amount);
 
-		if ((await client.balance(message.author.id)) < convertedAmount)
+		if ((await client.balance(message.author.id, message)) < convertedAmount)
 			return message.channel.send(
 				new MessageEmbed()
 					.setAuthor(
@@ -66,9 +66,9 @@ module.exports = {
 		const transactionFee = Math.floor((amount / 100) * 8); // 8% transaction fee
 		const transaction = convertedAmount - transactionFee;
 
-		await client.remove(message.author.id, convertedAmount);
-		await client.add(user.id, transaction);
-		await client.add('512670031247573005', transactionFee);
+		await client.remove(message.author.id, convertedAmount, message);
+		await client.add(user.id, transaction, message);
+		await client.add('512670031247573005', transactionFee, message);
 
 		message.channel.send(
 			new MessageEmbed()

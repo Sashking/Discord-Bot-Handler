@@ -9,13 +9,14 @@ module.exports = {
 	 * @param {String[]} args
 	 */
 	run: async (client, message, args) => {
-		if (message.author.id !== '512670031247573005') return;
+		if (!message.member.hasPermission('ADMINISTRATOR')) return;
+
 		const member = message.mentions.members.first() || message.member;
 
 		if (isNaN(parseInt(args[0])))
 			return message.channel.send('Please specify an amount.');
-		client.remove(member.id, parseInt(args[0]));
 
+		client.remove(member.id, parseInt(args[0]), message);
 		message.channel.send(`Removed ${args[0]} :coin: from ${member}!`);
 	},
 };

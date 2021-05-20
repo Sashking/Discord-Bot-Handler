@@ -1,8 +1,9 @@
 const mongo = require('mongoose');
 
 const Schema = new mongo.Schema({
-	id: String,
-	coins: Number,
+	Guild: String,
+	ID: String,
+	Coins: Number,
 });
 
 module.exports = mongo.model('money', Schema);

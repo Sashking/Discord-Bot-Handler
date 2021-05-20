@@ -22,7 +22,7 @@ module.exports = {
                     .setColor('00D166')
                     .setTimestamp()
             );
-            client.add(message.author.id, coins);
+            client.add(message.author.id, coins, message);
         } else {
             message.channel.send(
                 new MessageEmbed()
@@ -32,7 +32,7 @@ module.exports = {
                     .setColor('F93A2F')
                     .setTimestamp()
             );
-            client.remove(message.author.id, coins);
+            client.remove(message.author.id, coins, message);
         }
 
 		

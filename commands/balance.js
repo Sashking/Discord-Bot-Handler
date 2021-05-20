@@ -11,7 +11,7 @@ module.exports = {
 	run: async (client, message, args) => {
 		const member = message.mentions.members.first() || message.member;
 
-		const bal = await client.balance(member.id);
+		const bal = await client.balance(member.id, message);
 		message.channel.send(
 			new MessageEmbed()
 				.setAuthor(

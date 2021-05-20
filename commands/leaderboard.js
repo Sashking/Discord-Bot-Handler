@@ -15,7 +15,6 @@ module.exports = {
 			message.guild.members.cache.map(async (member) => {
 				const id = member.id;
 				const bal = await client.balance(id, message);
-				console.log(`${member.user.tag} -> ${bal}`);
 				return bal !== 0
 					? collection.set(id, {
 							id,

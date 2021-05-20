@@ -15,21 +15,21 @@ client.on('message', async (message) => {
 	if (!command) command = client.commands.get(client.aliases.get(cmd));
 	if (command) {
 		if (command.cooldown) {
-			if (cooldown.has(`${command.name}${message.author.id}`))
+			if (cooldown.has(`${command.name}${message.author.id}${message.guild.id}`))
 				return message.channel.send(
 					`You can't use this command for \`${ms(
-						cooldown.get(`${command.name}${message.author.id}`) -
+						cooldown.get(`${command.name}${message.author.id}${message.guild.id}`) -
 							Date.now(),
 						{ long: true }
 					)}\`.`
 				);
 			command.run(client, message, args);
 			cooldown.set(
-				`${command.name}${message.author.id}`,
+				`${command.name}${message.author.id}${message.guild.id}`,
 				Date.now() + command.cooldown
 			);
 			setTimeout(() => {
-				cooldown.delete(`${command.name}${message.author.id}`);
+				cooldown.delete(`${command.name}${message.author.id}${message.guild.id}`);
 			}, command.cooldown);
 		} else command.run(client, message, args);
 	}

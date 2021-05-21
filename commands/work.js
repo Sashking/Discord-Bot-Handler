@@ -20,13 +20,18 @@ module.exports = {
 		];
 		const jobIndex = Math.floor(Math.random() * jobs.length);
 		const coins = Math.floor(Math.random() * 200) + 1;
+		const workEmbed = new MessageEmbed()
+			.setAuthor(
+				message.author.tag,
+				message.author.displayAvatarURL({ dynamic: true })
+			)
+			.setDescription(
+				`You worked as a **${jobs[jobIndex]}** and earned **${coins}** :coin:!`
+			)
+			.setColor('00D166')
+			.setTimestamp();
 
-		client.add(message.author.id, coins, message);
-		message.channel.send(
-			new MessageEmbed()
-				.setDescription(`You worked as a **${jobs[jobIndex]}** and earned **${coins}** :coin:!`)
-				.setColor('00D166')
-				.setTimestamp()
-		);
+		client.add(message.author.id, coins, 'cash', message);
+		message.channel.send(workEmbed);
 	},
 };

@@ -26,40 +26,78 @@ client.categories = fs.readdirSync('./commands/');
 });
 
 // functions
-client.balance = (id, message) =>
+client.balance = (id, type, message) => 
 	new Promise(async (ful) => {
 		const data = await Schema.findOne({ Guild: message.guild.id, ID: id });
 		if (!data) return ful(0);
-		ful(data.Coins);
+		if (type == 'cash') ful(data.Cash);
+		else if (type == 'bank') ful(data.Bank);
+		else console.log('Invalid type (cash/bank)');
 	});
 
-client.add = (id, coins, message) => {
+client.add = (id, amount, type, message) => {
 	Schema.findOne({ Guild: message.guild.id, ID: id }, async (err, data) => {
 		if (err) throw err;
 		if (data) {
-			data.Coins += coins;
+			if (type == 'cash') {
+				data.Cash += amount;
+			} else if (type == 'bank') {
+				data.Bank += amount;
+			} else {
+				console.log('Invalid type (cash/bank)');
+			}
 		} else {
-			data = new Schema({
-				Guild: message.guild.id,
-				ID: id,
-				Coins: coins,
-			});
+			if (type == 'cash') {
+				data = new Schema({
+					Guild: message.guild.id,
+					ID: id,
+					Cash: amount,
+					Bank: 0,
+				});
+			} else if (type == 'bank') {
+				data = new Schema({
+					Guild: message.guild.id,
+					ID: id,
+					Cash: 0,
+					Bank: amount,
+				});
+			} else {
+				console.log('Invalid type (cash/bank)');
+			}
 		}
 		data.save();
 	});
 };
 
-client.remove = (id, coins, message) => {
-	Schema.findOne({ id }, async (err, data) => {
+client.remove = (id, amount, type, message) => {
+	Schema.findOne({ Guild: message.guild.id, ID: id }, async (err, data) => {
 		if (err) throw err;
 		if (data) {
-			data.Coins -= coins;
+			if (type == 'cash') {
+				data.Cash -= amount;
+			} else if (type == 'bank') {
+				data.Bank -= amount;
+			} else {
+				console.log('Invalid type (cash/bank)');
+			}
 		} else {
-			data = new Schema({
-				Guild: message.guild.id,
-				ID: id,
-				Coins: -coins,
-			});
+			if (type == 'cash') {
+				data = new Schema({
+					Guild: message.guild.id,
+					ID: id,
+					Cash: -amount,
+					Bank: 0,
+				});
+			} else if (type == 'bank') {
+				data = new Schema({
+					Guild: message.guild.id,
+					ID: id,
+					Cash: 0,
+					Bank: -amount,
+				});
+			} else {
+				console.log('Invalid type (cash/bank)');
+			}
 		}
 		data.save();
 	});

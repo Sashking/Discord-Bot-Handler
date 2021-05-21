@@ -8,61 +8,71 @@ module.exports = {
 	 * @param {String[]} args
 	 */
 	run: async (client, message, args) => {
-		const bet = args[0];
+		const invalidUseEmbed = new MessageEmbed()
+			.setAuthor(
+				message.author.tag,
+				message.author.displayAvatarURL({ dynamic: true })
+			)
+			.setDescription(
+				'Too few arguments given.\n\nUsage:\n`gamble <amount>`'
+			)
+			.setColor('F93A2F')
+			.setTimestamp();
 
-		if (!bet || isNaN(bet)) {
-			return message.channel.send(
-				new MessageEmbed()
-					.setAuthor(
-						message.author.tag,
-						message.author.displayAvatarURL({ dynamic: true })
-					)
-					.setDescription(
-						`
-                        Invalid use! Usage: 
-                        \`gamble <amount>\`
-                        `
-					)
-					.setTimestamp()
-			);
+		const insufficientBalanceEmbed = new MessageEmbed()
+			.setAuthor(
+				message.author.tag,
+				message.author.displayAvatarURL({ dynamic: true })
+			)
+			.setDescription(`Insufficient cash balance!`)
+			.setTimestamp();
+
+		const winEmbed = new MessageEmbed()
+			.setAuthor(
+				message.author.tag,
+				message.author.displayAvatarURL({ dynamic: true })
+			)
+			.setDescription(`Congratulations! You won **${args[0]}** :coin:!`)
+			.setColor('00D166')
+			.setTimestamp();
+
+		const lossEmbed = new MessageEmbed()
+			.setAuthor(
+				message.author.tag,
+				message.author.displayAvatarURL({ dynamic: true })
+			)
+			.setDescription(
+				`Aww \:( You lost **${args[0]}** :coin:! Better luck next time...`
+			)
+			.setColor('F93A2F')
+			.setTimestamp();
+
+		if (!args[0] || isNaN(args[0])) {
+			return message.channel.send(invalidUseEmbed);
 		}
 
-		const convertedBet = parseInt(bet);
+		const bet = parseInt(args[0]);
 
-		if (client.balance(message.author.id, message) < convertedBet || bet < 1) {
-			return message.channel.send(
-				new MessageEmbed()
-					.setAuthor(
-						message.author.tag,
-						message.author.displayAvatarURL({ dynamic: true })
-					)
-					.setDescription(`Insufficient balance!`)
-			);
+		if (
+			client.balance(message.author.id, 'cash', message) < bet ||
+			bet < 1
+		) {
+			return message.channel.send(insufficientBalanceEmbed);
 		}
 
-		const userWins = Math.random() < 0.49; // 49% probability of user winning
+		const userWins = Math.random() < 0.5; // 50% probability of winning
 
 		if (userWins) {
-			message.channel.send(
-				new MessageEmbed()
-					.setDescription(
-						`Congratulations! You won **${convertedBet}** :coin:!`
-					)
-					.setColor('00D166')
-					.setTimestamp()
-			);
-			await client.add(message.author.id, convertedBet, message);
+			await client.add(message.author.id, convertedBet, 'cash', message);
+			message.channel.send(winEmbed);
 		} else {
-			message.channel.send(
-				new MessageEmbed()
-					.setDescription(
-						`Aww \:( you lost **${convertedBet}** :coin:! Better luck next time...`
-					)
-					.setColor('F93A2F')
-					.setTimestamp()
+			await client.remove(
+				message.author.id,
+				convertedBet,
+				'cash',
+				message
 			);
-			await client.remove(message.author.id, convertedBet, message);
-			await client.add(message.guild.ownerID, transactionFee, message);
+			message.channel.send(lossEmbed);
 		}
 	},
 };

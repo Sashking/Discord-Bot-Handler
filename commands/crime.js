@@ -9,33 +9,29 @@ module.exports = {
 	 * @param {String[]} args
 	 */
 	run: async (client, message, args) => {
-		
 		const coins = Math.floor(Math.random() * 2000) + 1;
-        const positiveOutcome = Math.random() < 0.3; // 30% probability of outcome being positive
+		const positiveOutcome = Math.random() < 0.3; // 30% probability of outcome being positive
 
-        if (positiveOutcome) {
-            message.channel.send(
-                new MessageEmbed()
-                    .setDescription(
-                        `You successfully commited a crime and earned **${coins}** :coin:!`
-                    )
-                    .setColor('00D166')
-                    .setTimestamp()
-            );
-            client.add(message.author.id, coins, message);
-        } else {
-            message.channel.send(
-                new MessageEmbed()
-                    .setDescription(
-                        `You got caught and lost **${coins}** :coin:! Better luck next time...`
-                    )
-                    .setColor('F93A2F')
-                    .setTimestamp()
-            );
-            client.remove(message.author.id, coins, message);
-        }
+		const successEmbed = new MessageEmbed()
+			.setDescription(
+				`You successfully commited a crime and earned **${coins}** :coin:!`
+			)
+			.setColor('00D166')
+			.setTimestamp();
 
-		
-		
+		const failureEmbed = new MessageEmbed()
+			.setDescription(
+				`You got caught and lost **${coins}** :coin:! Better luck next time...`
+			)
+			.setColor('F93A2F')
+			.setTimestamp();
+
+		if (positiveOutcome) {
+			client.add(message.author.id, coins, 'cash', message);
+			message.channel.send(successEmbed);
+		} else {
+			client.remove(message.author.id, coins, 'cash', message);
+			message.channel.send(failureEmbed);
+		}
 	},
 };

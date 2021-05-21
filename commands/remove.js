@@ -11,12 +11,24 @@ module.exports = {
 	run: async (client, message, args) => {
 		if (!message.member.hasPermission('ADMINISTRATOR')) return;
 
-		const member = message.mentions.members.first() || message.member;
+		const invalidUseEmbed = new MessageEmbed()
+			.setAuthor(
+				message.author.tag,
+				message.author.displayAvatarURL({ dynamic: true })
+			)
+			.setDescription('Too few arguments given.\n\nUsage:\n`remove <member> [cash | bank] <amount>`')
+			.setColor('F93A2F')
+			.setTimestamp();
 
-		if (isNaN(parseInt(args[0])))
-			return message.channel.send('Please specify an amount.');
+		const member = message.mentions.members.first();
+		const type = args[1];
+		const amount = args[2];
 
-		client.remove(member.id, parseInt(args[0]), message);
-		message.channel.send(`Removed ${args[0]} :coin: from ${member}!`);
+		if (!member || !type || isNaN(parseInt(amount)))
+			return message.channel.send(invalidUseEmbed);
+		if (type == 'cash' || type == 'bank') {
+			client.remove(member.id, parseInt(amount), type, message);
+			message.channel.send(`Removed ${amount} :coin: from ${member}!`);
+		} else return message.channel.send(invalidUseEmbed);
 	},
 };

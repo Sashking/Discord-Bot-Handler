@@ -18,66 +18,99 @@ module.exports = {
 		);
 		helpEmbed.addFields(
 			{
-				name: `\`${prefix}balance\``,
+				name: '` balance `',
 				value: `shows yours or mentioned user's balance`,
 				inline: true,
 			},
 			{
-				name: `\`${prefix}work\``,
+				name: '` withdraw `',
+				value: `allows you to withdraw money from bank`,
+				inline: true,
+			},
+			{
+				name: '** **',
+				value: '** **',
+			},
+			{
+				name: '` deposit `',
+				value: `allows you to deposit money to bank`,
+				inline: true,
+			},
+			{
+				name: '` work `',
 				value: `lets you get some money by working`,
 				inline: true,
 			},
 			{
-				name: `\`${prefix}crime\``,
+				name: '** **',
+				value: '** **',
+			},
+			{
+				name: '` crime `',
 				value: `high risk - high reward ¯\\_(ツ)_/¯`,
 				inline: true,
 			},
 			{
-				name: `\`${prefix}daily\``,
+				name: '` daily `',
 				value: `claim your daily reward`,
 				inline: true,
 			},
 			{
-				name: `\`${prefix}weekly\``,
+				name: '** **',
+				value: '** **',
+			},
+			{
+				name: '` weekly `',
 				value: `claim your weekly reward`,
 				inline: true,
 			},
 			{
-				name: `\`${prefix}leaderboard\``,
+				name: '` leaderboard `',
 				value: `top 10 players in server`,
 				inline: true,
 			},
 			{
-				name: `\`${prefix}gamble\``,
+				name: '** **',
+				value: '** **',
+			},
+			{
+				name: '` gamble <amount> `',
 				value: `try your luck and either double your bet or lose it`,
 				inline: true,
 			},
 			{
-				name: `\`${prefix}pay\``,
+				name: '` pay <user> <amount> `',
 				value: `(amins only) transfer specified amount of money to another user`,
 				inline: true,
 			},
 			{
-				name: `\`${prefix}add\``,
+				name: '** **',
+				value: '** **',
+			},
+			{
+				name: '` add <user> [cash | bank] <amount> `',
 				value: `(admins only) adds specified amount of money to selected user`,
 				inline: true,
 			},
 			{
-				name: `\`${prefix}remove\``,
+				name: '` remove [cash | bank] <amount> `',
 				value: `removes specified amount of money from selcted user`,
 				inline: true,
 			},
 			{
-				name: `\`${prefix}help\``,
+				name: '** **',
+				value: '** **',
+			},
+			{
+				name: '` help `',
 				value: `list of all commands`,
 				inline: true,
 			},
 			{
-				name: `\`${prefix}ping\``,
+				name: '` ping `',
 				value: `see bot's ping`,
 				inline: true,
-			},
-			{ name: `** **`, value: `** **`, inline: true }
+			}
 		);
 		helpEmbed.setColor('F8C300');
 		helpEmbed.setTimestamp();

@@ -14,7 +14,9 @@ module.exports = {
 		await Promise.all(
 			message.guild.members.cache.map(async (member) => {
 				const id = member.id;
-				const bal = await client.balance(id, message);
+				const bal =
+					(await client.balance(id, 'cash', message)) +
+					(await client.balance(id, 'bank', message));
 				return bal !== 0
 					? collection.set(id, {
 							id,

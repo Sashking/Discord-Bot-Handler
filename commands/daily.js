@@ -23,7 +23,6 @@ module.exports = {
 	 */
 	run: async (client, message, args) => {
 		if (claimedCache.includes(message.author.id)) {
-			console.log('Returning from cache.');
 			return message.channel.send(cooldownEmbed);
 		}
 
@@ -32,9 +31,7 @@ module.exports = {
 			User: message.author.id,
 		};
 
-		console.log('Fetching from mongo.');
 		const results = await Schema.findOne(obj);
-		console.log(results);
 		if (results) {
 			const then = new Date(results.updatedAt).getTime();
 			const now = new Date().getTime();
@@ -44,29 +41,29 @@ module.exports = {
 
 			if (DiffDays <= 1) {
 				claimedCache.push(message.author.id);
-				return message.channel.send(cooldownEmbed);	
+				return message.channel.send(cooldownEmbed);
 			}
 		}
 
 		await Schema.findOneAndUpdate(obj, obj, {
 			upsert: true,
+			useFindAndModify: false // (not sure what this does)
 		});
 		claimedCache.push(message.author.id);
 
 		const coins = Math.floor(Math.random() * 5000) + 1;
+		const receivedEmbed = new MessageEmbed()
+			.setAuthor(
+				message.author.tag,
+				message.author.displayAvatarURL({ dynamic: true })
+			)
+			.setDescription(
+				`You received **${coins}** :coin: today as your daily reward!\nMake sure to come back tomorrow and claim your daily reward again.`
+			)
+			.setColor('00D166')
+			.setTimestamp();
 
-		message.channel.send(
-			new MessageEmbed()
-				.setAuthor(
-					message.author.tag,
-					message.author.displayAvatarURL({ dynamic: true })
-				)
-				.setDescription(
-					`You received **${coins}** :coin: today as your daily reward!\nMake sure to come back tomorrow and claim your daily reward again.`
-				)
-				.setColor('00D166')
-				.setTimestamp()
-		);
-		client.add(message.author.id, coins, message);
+			client.add(message.author.id, coins, 'cash', message);
+			message.channel.send(receivedEmbed);
 	},
 };

@@ -60,20 +60,6 @@ module.exports = {
 				value: '** **',
 			},
 			{
-				name: '` weekly `',
-				value: `claim your weekly reward`,
-				inline: true,
-			},
-			{
-				name: '` leaderboard `',
-				value: `top 10 players in server`,
-				inline: true,
-			},
-			{
-				name: '** **',
-				value: '** **',
-			},
-			{
 				name: '` gamble <amount> `',
 				value: `try your luck and either double your bet or lose it`,
 				inline: true,
@@ -100,6 +86,11 @@ module.exports = {
 			{
 				name: '** **',
 				value: '** **',
+			},
+			{
+				name: '` leaderboard `',
+				value: `top 10 players in server`,
+				inline: true,
 			},
 			{
 				name: '` help `',

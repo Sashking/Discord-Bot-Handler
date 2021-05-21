@@ -63,12 +63,12 @@ module.exports = {
 		const userWins = Math.random() < 0.5; // 50% probability of winning
 
 		if (userWins) {
-			await client.add(message.author.id, convertedBet, 'cash', message);
+			await client.add(message.author.id, bet, 'cash', message);
 			message.channel.send(winEmbed);
 		} else {
 			await client.remove(
 				message.author.id,
-				convertedBet,
+				bet,
 				'cash',
 				message
 			);

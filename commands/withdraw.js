@@ -26,6 +26,7 @@ module.exports = {
 				message.author.displayAvatarURL({ dynamic: true })
 			)
 			.setDescription(`Insufficient bank balance!`)
+            .setColor('F93A2F')
 			.setTimestamp();
 
 		const successEmbed = new MessageEmbed()
@@ -33,22 +34,21 @@ module.exports = {
 				message.author.tag,
 				message.author.displayAvatarURL({ dynamic: true })
 			)
-			.setDescription(`Withdrew **${amount}** :coin:.`)
+			.setDescription(`Withdrew **${args[0]}** :coin:.`)
 			.setColor('00D166');
 
-		if (!args[0]) {
-			const amount = client.balance(message.author.id, 'bank', message);
-		} else if (isNaN(args[0])) return message.channel.send(invalidUseEmbed);
-		else {
-			const amount = parseInt(args[0]);
-		}
-
-		if ((await client.balance(message.author.id, 'bank', message)) < amount)
+		if (isNaN(args[0])) {
+			return message.channel.send(invalidUseEmbed);
+		} else if (
+			(await client.balance(message.author.id, 'bank', message)) <
+			parseInt(args[0])
+		) {
 			return message.channel.send(insufficientBalanceEmbed);
-
-		await client.remove(message.author.id, amount, 'bank', message);
-		await client.add(message.author.id, amount, 'cash', message);
-
-		message.channel.send(successEmbed);
+		} else {
+			const amount = parseInt(args[0]);
+			await client.remove(message.author.id, amount, 'bank', message);
+			await client.add(message.author.id, amount, 'cash', message);
+			message.channel.send(successEmbed);
+		}
 	},
 };

@@ -31,7 +31,7 @@ module.exports = {
 			.setColor('00D166')
 			.setTimestamp();
 
-		client.add(message.author.id, coins, 'cash', message);
+		await client.add(message.author.id, coins, 'cash', message);
 		message.channel.send(workEmbed);
 	},
 };

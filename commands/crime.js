@@ -13,24 +13,20 @@ module.exports = {
 		const positiveOutcome = Math.random() < 0.3; // 30% probability of outcome being positive
 
 		const successEmbed = new MessageEmbed()
-			.setDescription(
-				`You successfully commited a crime and earned **${coins}** :coin:!`
-			)
+			.setDescription(`You successfully commited a crime and earned **${coins}** :coin:!`)
 			.setColor('00D166')
 			.setTimestamp();
 
 		const failureEmbed = new MessageEmbed()
-			.setDescription(
-				`You got caught and lost **${coins}** :coin:! Better luck next time...`
-			)
+			.setDescription(`You got caught and lost **${coins}** :coin:! Better luck next time...`)
 			.setColor('F93A2F')
 			.setTimestamp();
 
 		if (positiveOutcome) {
-			client.add(message.author.id, coins, 'cash', message);
+			await client.add(message.author.id, coins, 'cash', message);
 			message.channel.send(successEmbed);
 		} else {
-			client.remove(message.author.id, coins, 'cash', message);
+			await client.remove(message.author.id, coins, 'cash', message);
 			message.channel.send(failureEmbed);
 		}
 	},

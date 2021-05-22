@@ -22,10 +22,7 @@ module.exports = {
 			.setTimestamp();
 
 		const successEmbed = new MessageEmbed()
-			.setAuthor(
-				message.author.tag,
-				message.author.displayAvatarURL({ dynamic: true })
-			)
+			.setAuthor(message.author.tag, message.author.displayAvatarURL({ dynamic: true }))
 			.setDescription(`Deposited **${args[0]}** :coin:.`)
 			.setColor('00D166')
 			.setTimestamp();

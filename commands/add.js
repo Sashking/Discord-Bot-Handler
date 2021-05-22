@@ -27,7 +27,7 @@ module.exports = {
 		if (!member || !type || isNaN(parseInt(amount)))
 			return message.channel.send(invalidUseEmbed);
 		if (type == 'cash' || type == 'bank') {
-			client.add(member.id, parseInt(amount), type, message);
+			await client.add(member.id, parseInt(amount), type, message);
 			message.channel.send(`Added ${amount} :coin: to ${member}!`);
 		} else return message.channel.send(invalidUseEmbed);
 	},

@@ -28,16 +28,6 @@ module.exports = {
 			.setDescription(`Insufficient cash balance!`)
 			.setTimestamp();
 
-		const successEmbed = new MessageEmbed()
-			.setAuthor(
-				message.author.tag,
-				message.author.displayAvatarURL({ dynamic: true })
-			)
-			.setDescription(
-				`${message.author} transfered **${amount}** :coin: to ${user}.`
-			)
-			.setColor('00D166');
-
 		const payYourselfEmbed = new MessageEmbed()
 			.setAuthor(
 				message.author.tag,
@@ -55,6 +45,16 @@ module.exports = {
 			return message.channel.send(payYourselfEmbed);
 
 		const amount = parseInt(args[1]);
+
+		const successEmbed = new MessageEmbed()
+			.setAuthor(
+				message.author.tag,
+				message.author.displayAvatarURL({ dynamic: true })
+			)
+			.setDescription(
+				`${message.author} transfered **${amount}** :coin: to ${user}.`
+			)
+			.setColor('00D166');
 
 		if ((await client.balance(message.author.id, message)) < amount)
 			return message.channel.send(insufficientBalanceEmbed);

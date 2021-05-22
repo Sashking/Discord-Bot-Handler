@@ -20,7 +20,7 @@ module.exports = {
 
 		const winEmbed = new MessageEmbed()
 			.setAuthor(message.author.tag, message.author.displayAvatarURL({ dynamic: true }))
-			.setDescription(`Congratulations! You robbed **${user}** :coin:!`)
+			.setDescription(`Congratulations! You robbed **${user}** and got ${coins} :coin:!`)
 			.setColor('00D166')
 			.setTimestamp();
 

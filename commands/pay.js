@@ -29,7 +29,7 @@ module.exports = {
 		
 		const minimalAmountEmbed = new MessageEmbed()
 			.setAuthor(message.author.tag, message.author.displayAvatarURL({ dynamic: true }))
-			.setDescription(`Minimal transfer amount is 1 :coin:!`)
+			.setDescription(`Minimal transfer amount is ${client.emoji} 1`)
 			.setColor('F93A2F')
 			.setTimestamp();
 
@@ -45,7 +45,7 @@ module.exports = {
 
 		const successEmbed = new MessageEmbed()
 			.setAuthor(message.author.tag, message.author.displayAvatarURL({ dynamic: true }))
-			.setDescription(`${message.author} transfered **${amount}** :coin: to ${user}.`)
+			.setDescription(`${message.author} transfered ${client.emoji} **${amount}** to ${user}.`)
 			.setColor('00D166')
 			.setTimestamp();
 

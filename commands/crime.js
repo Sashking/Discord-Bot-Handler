@@ -13,12 +13,12 @@ module.exports = {
 		const positiveOutcome = Math.random() < 0.3; // 30% probability of outcome being positive
 
 		const successEmbed = new MessageEmbed()
-			.setDescription(`You successfully commited a crime and earned **${coins}** :coin:!`)
+			.setDescription(`You successfully commited a crime and earned ${client.emoji} **${coins}**`)
 			.setColor('00D166')
 			.setTimestamp();
 
 		const failureEmbed = new MessageEmbed()
-			.setDescription(`You got caught and lost **${coins}** :coin:! Better luck next time...`)
+			.setDescription(`You got caught and lost ${client.emoji} **${coins}** Better luck next time...`)
 			.setColor('F93A2F')
 			.setTimestamp();
 

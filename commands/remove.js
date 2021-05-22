@@ -25,7 +25,14 @@ module.exports = {
 			return message.channel.send(invalidUseEmbed);
 		if (type == 'cash' || type == 'bank') {
 			await client.remove(member.id, parseInt(amount), type, message);
-			message.channel.send(`Removed ${amount} :coin: from ${member}!`);
+
+			const embed = new MessageEmbed()
+				.setAuthor(member.user.tag, member.user.displayAvatarURL({ dynamic: true }))
+				.setDescription(`Removed ${client.emoji} ${amount} from ${member}`)
+				.setColor('00D166')
+				.setTimestamp()
+
+			message.channel.send(embed);
 		} else return message.channel.send(invalidUseEmbed);
 	},
 };

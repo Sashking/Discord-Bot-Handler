@@ -1,29 +1,17 @@
-const { Collection, Client, Discord, Message } = require('discord.js');
-const fs = require('fs');
+const { Collection, Client } = require('discord.js');
 const config = require('./config.json');
-const client = new Client({
-	disableEveryone: true,
-});
 const Schema = require('./money');
 const mongo = require('mongoose');
-mongo
-	.connect(
-		'mongodb+srv://sashking:D0i6oeQtBnYBwz45@cluster0.lyi8d.mongodb.net/Data',
-		{
-			useUnifiedTopology: true,
-			useNewUrlParser: true,
-		}
-	)
+const fs = require('fs');
+const client = new Client({ disableEveryone: true, });
+mongo.connect('mongodb+srv://sashking:D0i6oeQtBnYBwz45@cluster0.lyi8d.mongodb.net/Data', { useUnifiedTopology: true, useNewUrlParser: true, })
 	.then(console.log('\n\n💾  Connected to MongoDB!'));
-const prefix = config.prefix;
-const token = config.token;
 module.exports = client;
+client.emoji = config.emoji;
 client.commands = new Collection();
 client.aliases = new Collection();
 client.categories = fs.readdirSync('./commands/');
-['command'].forEach((handler) => {
-	require(`./handlers/${handler}`)(client);
-});
+['command'].forEach((handler) => { require(`./handlers/${handler}`)(client); });
 
 // functions
 client.balance = (id, type, message) => 
@@ -32,7 +20,6 @@ client.balance = (id, type, message) =>
 		if (!data) return ful(0);
 		if (type == 'cash') ful(data.Cash);
 		else if (type == 'bank') ful(data.Bank);
-		else console.log('Invalid type (cash/bank)');
 	});
 
 client.add = (id, amount, type, message) => {
@@ -89,4 +76,4 @@ client.remove = (id, amount, type, message) => {
 	});
 };
 
-client.login(token);
+client.login(config.token);

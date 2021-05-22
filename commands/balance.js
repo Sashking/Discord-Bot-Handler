@@ -19,9 +19,9 @@ module.exports = {
 				member.user.displayAvatarURL({ dynamic: true })
 			)
 			.addFields(
-				{ name: 'Cash:', value: `${cash} :coin:`, inline: true },
-				{ name: 'Bank:', value: `${bank} :coin:`, inline: true },
-				{ name: 'Total:', value: `${cash + bank} :coin:`, inline: true }
+				{ name: 'Cash:', value: `${client.emoji} ${cash}`, inline: true },
+				{ name: 'Bank:', value: `${client.emoji} ${bank}`, inline: true },
+				{ name: 'Total:', value: `${client.emoji} ${cash + bank}`, inline: true }
 			)
 			.setColor('F8C300')
 			.setTimestamp();

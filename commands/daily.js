@@ -54,7 +54,7 @@ module.exports = {
 		const coins = Math.floor(Math.random() * 5000) + 1;
 		const receivedEmbed = new MessageEmbed()
 			.setAuthor(message.author.tag, message.author.displayAvatarURL({ dynamic: true }))
-			.setDescription(`You received **${coins}** :coin: today as your daily reward!\nMake sure to come back tomorrow and claim your daily reward again.`)
+			.setDescription(`You received ${client.emoji} **${coins}** today as your daily reward!\nMake sure to come back tomorrow and claim your daily reward again.`)
 			.setColor('00D166')
 			.setTimestamp();
 

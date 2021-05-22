@@ -26,7 +26,7 @@ module.exports = {
 				message.author.displayAvatarURL({ dynamic: true })
 			)
 			.setDescription(
-				`You worked as a **${jobs[jobIndex]}** and earned **${coins}** :coin:!`
+				`You worked as a **${jobs[jobIndex]}** and earned ${client.emoji} **${coins}**`
 			)
 			.setColor('00D166')
 			.setTimestamp();

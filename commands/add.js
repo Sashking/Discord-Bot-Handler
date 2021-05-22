@@ -12,10 +12,7 @@ module.exports = {
 		if (!message.member.hasPermission('ADMINISTRATOR')) return;
 
 		const invalidUseEmbed = new MessageEmbed()
-			.setAuthor(
-				message.author.tag,
-				message.author.displayAvatarURL({ dynamic: true })
-			)
+			.setAuthor(message.author.tag, message.author.displayAvatarURL({ dynamic: true }))
 			.setDescription('Too few arguments given.\n\nUsage:\n`add <member> [cash | bank] <amount>`')
 			.setColor('F93A2F')
 			.setTimestamp();
@@ -28,7 +25,14 @@ module.exports = {
 			return message.channel.send(invalidUseEmbed);
 		if (type == 'cash' || type == 'bank') {
 			await client.add(member.id, parseInt(amount), type, message);
-			message.channel.send(`Added ${amount} :coin: to ${member}!`);
+
+			const embed = new MessageEmbed()
+				.setAuthor(member.user.tag, member.user.displayAvatarURL({ dynamic: true }))
+				.setDescription(`Added ${client.emoji} ${amount} to ${member}`)
+				.setColor('00D166')
+				.setTimestamp()
+
+			message.channel.send(embed);
 		} else return message.channel.send(invalidUseEmbed);
 	},
 };

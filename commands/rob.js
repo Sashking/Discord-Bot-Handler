@@ -24,13 +24,13 @@ module.exports = {
 
 		const winEmbed = new MessageEmbed()
 			.setAuthor(message.author.tag, message.author.displayAvatarURL({ dynamic: true }))
-			.setDescription(`Congratulations! You robbed **${user}** successfully and got ${coins} :coin:!`)
+			.setDescription(`Congratulations! You robbed **${user}** successfully and got ${client.emoji} ${coins}`)
 			.setColor('00D166')
 			.setTimestamp();
 
 		const lossEmbed = new MessageEmbed()
 			.setAuthor(message.author.tag, message.author.displayAvatarURL({ dynamic: true }))
-			.setDescription(`You got caught while robbing ${user}. And now have to pay ${coins} :coin:.`)
+			.setDescription(`You got caught while robbing ${user}. And now have to pay ${client.emoji} ${coins}`)
 			.setColor('F93A2F')
 			.setTimestamp();
 

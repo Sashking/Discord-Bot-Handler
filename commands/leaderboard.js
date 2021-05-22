@@ -33,9 +33,9 @@ module.exports = {
 				.setTitle(`Leaderboard in **${message.guild.name}**`)
 				.setDescription(
 					data.map((v, i) => {
-						return `${i + 1}. ${
+						return `**${i + 1}.** ${
 							client.users.cache.get(v.id).tag
-						} -> **${v.bal} :coin:**`;
+						} -> ${client.emoji} **${v.bal}**`;
 					})
 				)
 				.setColor('F8C300')

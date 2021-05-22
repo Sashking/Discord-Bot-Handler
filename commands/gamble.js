@@ -21,13 +21,13 @@ module.exports = {
 
 		const winEmbed = new MessageEmbed()
 			.setAuthor(message.author.tag, message.author.displayAvatarURL({ dynamic: true }))
-			.setDescription(`Congratulations! You won **${args[0]}** :coin:!`)
+			.setDescription(`Congratulations! You won ${client.emoji} **${args[0]}**`)
 			.setColor('00D166')
 			.setTimestamp();
 
 		const lossEmbed = new MessageEmbed()
 			.setAuthor(message.author.tag, message.author.displayAvatarURL({ dynamic: true }))
-			.setDescription(`Aww \:( You lost **${args[0]}** :coin:! Better luck next time...`)
+			.setDescription(`Aww \:( You lost ${client.emoji} **${args[0]}**`)
 			.setColor('F93A2F')
 			.setTimestamp();
 

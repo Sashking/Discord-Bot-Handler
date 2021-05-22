@@ -23,13 +23,13 @@ module.exports = {
 
 		const successEmbed = new MessageEmbed()
 			.setAuthor(message.author.tag, message.author.displayAvatarURL({ dynamic: true }))
-			.setDescription(`Withdrew **${args[0]}** :coin:.`)
+			.setDescription(`Withdrew ${client.emoji} **${args[0]}**`)
 			.setColor('00D166')
 			.setTimestamp();
 		
 		const minimalAmountEmbed = new MessageEmbed()
 			.setAuthor(message.author.tag, message.author.displayAvatarURL({ dynamic: true }))
-			.setDescription(`Minimal withdraw amount is 1 :coin:!`)
+			.setDescription(`Minimal withdraw amount is ${client.emoji} 1`)
             .setColor('F93A2F')
 			.setTimestamp();
 

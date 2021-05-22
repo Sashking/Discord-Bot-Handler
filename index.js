@@ -43,8 +43,6 @@ client.add = (id, amount, type, message) => {
 				data.Cash += amount;
 			} else if (type == 'bank') {
 				data.Bank += amount;
-			} else {
-				console.log('Invalid type (cash/bank)');
 			}
 		} else {
 			if (type == 'cash') {
@@ -61,8 +59,6 @@ client.add = (id, amount, type, message) => {
 					Cash: 0,
 					Bank: amount,
 				});
-			} else {
-				console.log('Invalid type (cash/bank)');
 			}
 		}
 		data.save();
@@ -77,8 +73,6 @@ client.remove = (id, amount, type, message) => {
 				data.Cash -= amount;
 			} else if (type == 'bank') {
 				data.Bank -= amount;
-			} else {
-				console.log('Invalid type (cash/bank)');
 			}
 		} else {
 			if (type == 'cash') {
@@ -95,8 +89,6 @@ client.remove = (id, amount, type, message) => {
 					Cash: 0,
 					Bank: -amount,
 				});
-			} else {
-				console.log('Invalid type (cash/bank)');
 			}
 		}
 		data.save();

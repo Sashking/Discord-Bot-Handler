@@ -10,31 +10,28 @@ module.exports = {
 	 */
 	run: async (client, message, args) => {
 		const invalidUseEmbed = new MessageEmbed()
-			.setAuthor(
-				message.author.tag,
-				message.author.displayAvatarURL({ dynamic: true })
-			)
-			.setDescription(
-				'Too few arguments given.\n\nUsage:\n`pay <user> <amount>`'
-			)
+			.setAuthor(message.author.tag, message.author.displayAvatarURL({ dynamic: true }))
+			.setDescription('Too few arguments given.\n\nUsage:\n`pay <user> <amount>`')
 			.setColor('F93A2F')
 			.setTimestamp();
 
 		const insufficientBalanceEmbed = new MessageEmbed()
-			.setAuthor(
-				message.author.tag,
-				message.author.displayAvatarURL({ dynamic: true })
-			)
+			.setAuthor(message.author.tag, message.author.displayAvatarURL({ dynamic: true }))
 			.setDescription(`Insufficient cash balance!`)
+			.setColor('F93A2F')
 			.setTimestamp();
 
 		const payYourselfEmbed = new MessageEmbed()
-			.setAuthor(
-				message.author.tag,
-				message.author.displayAvatarURL({ dynamic: true })
-			)
+			.setAuthor(message.author.tag, message.author.displayAvatarURL({ dynamic: true }))
 			.setDescription(`You can't pay yourself!`)
-			.setColor('00D166');
+			.setColor('F93A2F')
+			.setTimestamp();
+		
+		const minimalAmountEmbed = new MessageEmbed()
+			.setAuthor(message.author.tag, message.author.displayAvatarURL({ dynamic: true }))
+			.setDescription(`Minimal transfer amount is 1 :coin:!`)
+			.setColor('F93A2F')
+			.setTimestamp();
 
 		const user = message.mentions.users.first();
 
@@ -47,17 +44,13 @@ module.exports = {
 		const amount = parseInt(args[1]);
 
 		const successEmbed = new MessageEmbed()
-			.setAuthor(
-				message.author.tag,
-				message.author.displayAvatarURL({ dynamic: true })
-			)
-			.setDescription(
-				`${message.author} transfered **${amount}** :coin: to ${user}.`
-			)
-			.setColor('00D166');
+			.setAuthor(message.author.tag, message.author.displayAvatarURL({ dynamic: true }))
+			.setDescription(`${message.author} transfered **${amount}** :coin: to ${user}.`)
+			.setColor('00D166')
+			.setTimestamp();
 
-		if ((await client.balance(message.author.id, message)) < amount)
-			return message.channel.send(insufficientBalanceEmbed);
+		if (amount < 1) return message.channel.send(minimalAmountEmbed);
+		if ((await client.balance(message.author.id, 'cash', message)) < amount) return message.channel.send(insufficientBalanceEmbed);
 
 		await client.remove(message.author.id, amount, 'cash', message);
 		await client.add(user.id, amount, 'cash', message);

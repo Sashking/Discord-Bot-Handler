@@ -10,7 +10,7 @@ const clearCache = () => {
 clearCache();
 
 const cooldownEmbed = new MessageEmbed();
-cooldownEmbed.setDescription(`You have already claimed your daily reward!`);
+cooldownEmbed.setDescription(`You have already claimed your daily reward in last 24 hours!`);
 cooldownEmbed.setColor('F93A2F');
 cooldownEmbed.setTimestamp();
 

@@ -93,7 +93,7 @@ module.exports = {
 				inline: true,
 			},
 			{
-				name: '` remove [cash | bank] <amount> `',
+				name: '` remove <user> [cash | bank] <amount> `',
 				value: `removes specified amount of money from selcted user`,
 				inline: true,
 			},

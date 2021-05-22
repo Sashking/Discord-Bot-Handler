@@ -23,8 +23,8 @@ module.exports = {
 				inline: true,
 			},
 			{
-				name: '` withdraw `',
-				value: `allows you to withdraw money from bank`,
+				name: '` leaderboard `',
+				value: `top 10 players in server`,
 				inline: true,
 			},
 			{
@@ -32,13 +32,27 @@ module.exports = {
 				value: '** **',
 			},
 			{
+				name: '` withdraw `',
+				value: `allows you to withdraw money from bank`,
+				inline: true,
+			},
+			{
 				name: '` deposit `',
 				value: `allows you to deposit money to bank`,
 				inline: true,
 			},
 			{
+				name: '** **',
+				value: '** **',
+			},
+			{
 				name: '` work `',
 				value: `lets you get some money by working`,
+				inline: true,
+			},
+			{
+				name: '` daily `',
+				value: `claim your daily reward`,
 				inline: true,
 			},
 			{
@@ -51,9 +65,9 @@ module.exports = {
 				inline: true,
 			},
 			{
-				name: '` daily `',
-				value: `claim your daily reward`,
-				inline: true,
+				name: '` rob <user> `',
+				value: `allows you to steal cash from other users`,
+				inline: true
 			},
 			{
 				name: '** **',
@@ -86,11 +100,6 @@ module.exports = {
 			{
 				name: '** **',
 				value: '** **',
-			},
-			{
-				name: '` leaderboard `',
-				value: `top 10 players in server`,
-				inline: true,
 			},
 			{
 				name: '` help `',

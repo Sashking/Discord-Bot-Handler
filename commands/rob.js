@@ -15,18 +15,21 @@ module.exports = {
 			.setTimestamp();
 
 		const user = message.mentions.members.first();
-		const coins = Math.floor(Math.random() * client.balance(user.id, 'cash', message));
+
+        if (!user) return message.channel.send(invalidUseEmbed);
+
+		const coins = await client.balance(user.id, 'cash', message);
 		const robSuccesful = Math.random() < 0.5;
 
 		const winEmbed = new MessageEmbed()
 			.setAuthor(message.author.tag, message.author.displayAvatarURL({ dynamic: true }))
-			.setDescription(`Congratulations! You robbed **${user}** and got ${coins} :coin:!`)
+			.setDescription(`Congratulations! You robbed **${user}** successfully and got ${coins} :coin:!`)
 			.setColor('00D166')
 			.setTimestamp();
 
 		const lossEmbed = new MessageEmbed()
 			.setAuthor(message.author.tag, message.author.displayAvatarURL({ dynamic: true }))
-			.setDescription(`You got caught while robbing ${user}. And now have to pay ${coins}.`)
+			.setDescription(`You got caught while robbing ${user}. And now have to pay ${coins} :coin:.`)
 			.setColor('F93A2F')
 			.setTimestamp();
 
@@ -36,7 +39,6 @@ module.exports = {
 			.setColor('F93A2F')
 			.setTimestamp();
 
-		if (!user) return message.channel.send(invalidUseEmbed);
 		if (client.balance(user.id, 'cash', message) < 1) return message.channel.send(noMoneyInCashEmbed);
 
 		if (robSuccesful) {

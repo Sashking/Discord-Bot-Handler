@@ -39,11 +39,8 @@ client.add = (id, amount, type, message) => {
 	Schema.findOne({ Guild: message.guild.id, ID: id }, async (err, data) => {
 		if (err) throw err;
 		if (data) {
-			if (type == 'cash') {
-				data.Cash += amount;
-			} else if (type == 'bank') {
-				data.Bank += amount;
-			}
+			if (type == 'cash') data.Cash += amount;
+			else if (type == 'bank') data.Bank += amount;
 		} else {
 			if (type == 'cash') {
 				data = new Schema({
@@ -69,11 +66,8 @@ client.remove = (id, amount, type, message) => {
 	Schema.findOne({ Guild: message.guild.id, ID: id }, async (err, data) => {
 		if (err) throw err;
 		if (data) {
-			if (type == 'cash') {
-				data.Cash -= amount;
-			} else if (type == 'bank') {
-				data.Bank -= amount;
-			}
+			if (type == 'cash') data.Cash -= amount;
+			else if (type == 'bank') data.Bank -= amount;
 		} else {
 			if (type == 'cash') {
 				data = new Schema({

@@ -10,4 +10,4 @@ const Schema = new mongo.Schema(
 	}
 );
 
-module.exports = mongo.model('dailyRewardsSchema', Schema);
+module.exports = mongo.model('daily-rewards', Schema);
